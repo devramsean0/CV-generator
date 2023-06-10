@@ -1,11 +1,10 @@
 import figlet from 'figlet';
-import { blue, green } from 'colorette';
+import { blue, bold, green } from 'colorette';
 import { Command } from 'commander';
 import { getMissingData } from './lib/getMissingData';
 import { loadJSON } from './lib/fileLoader';
 import { generateSummary } from './lib/generateSummary';
 import getOpenAIKey from './lib/openai';
-import fs from 'fs/promises';
 import { writeFile } from './lib/writeFile';
 
 // CLI setup
@@ -27,7 +26,7 @@ const outputMDRows = [];
 // Main
 (async () => {
     // Initial parsing and validation
-    console.log(blue(figlet.textSync('CV-Generator')));
+    console.log(bold(blue(figlet.textSync('CV-Generator'))));
     if (options.openAI === 'none') {
         openAIKey = await getMissingData("What is your OpenAI API key?");
     }
@@ -41,9 +40,11 @@ const outputMDRows = [];
     outputMDRows.push(`# ${data.name}`);
     outputMDRows.push(`**${data.title}**`);
     outputMDRows.push(`<br />`);
+    console.log(green('Done Initial Header'))
     // Generate a summary
     const summary = await generateSummary(data, openAI, options);
     outputMDRows.push(summary);
+    console.log(green('Done Summary'))
     // Contact info
     outputMDRows.push(`## Contact Information`);
     if (data.contact.email) {
@@ -55,6 +56,7 @@ const outputMDRows = [];
     if (data.contact.website) {
         outputMDRows.push(`Website: (${data.contact.website})[${data.contact.website}], `);
     }
+    console.log(green('Done Contact Info'))
     // Work Experience
     outputMDRows.push(`## Work Experience`);
     data.workExperience.forEach((job: any) => {
@@ -62,6 +64,7 @@ const outputMDRows = [];
         outputMDRows.push(`**${job.startDate} - ${job.endDate}**`);
         outputMDRows.push(job.description);
     });
+    console.log(green('Done Work Experience'))
     // Education
     outputMDRows.push(`## Education`);
     data.education.forEach((school: any) => {
@@ -73,7 +76,15 @@ const outputMDRows = [];
         }
         outputMDRows.push(school.description);
     });
-    console.log(outputMDRows.join('\n'));
+    console.log(green('Done Education'))
+    // Skills
+    outputMDRows.push(`## Skills`);
+    data.skills.forEach((skill: any) => {
+        outputMDRows.push(`### ${skill.name}`);
+        outputMDRows.push(`**${skill.level}**`);
+    });
+    console.log(green('Done Skills'))
     await writeFile(outputMDRows, options);
+    console.log(bold(green('Done! You are advised to review the output and style it as you want before you send it.')))
     process.exit(0);
 })();
