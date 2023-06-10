@@ -22,3 +22,21 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_KEY}}
+  copySchema:
+    if: contains(github.event.head_commit.message, 'publish')
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: node
+        uses: actions/setup-node@v2
+      - name: Run copy script
+        run: npm run copySchema
+      - name: git commit
+        run: |
+          git add *
+          git config --global user.name 'Schema Copy Tool'
+          git config --global user.email 'devramsean0@users.noreply.github.com'
+          git commit -am "Automated Schema copy"
+          git push
+    
