@@ -1,0 +1,129 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "CV Data",
+    "description": "Data used to build your CV",
+    "type": "object",
+
+    "properties": {
+        "name": {
+            "description": "Your name",
+            "type": "string"
+        },
+        "title": {
+            "description": "Your title",
+            "type": "string"
+        },
+        "location": {
+            "description": "Your location",
+            "type": "string"
+        },
+        "currentlyLookingFor": {
+            "description": "What you are looking for",
+            "type": "string"
+        },
+        "contact": {
+            "description": "Your contact details",
+            "type": "object",
+            "properties": {
+                "email": {
+                    "description": "Your email address",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Your phone number",
+                    "type": "string"
+                },
+                "website": {
+                    "description": "Your website",
+                    "type": "string"
+                },
+                "github": {
+                    "description": "Your github profile",
+                    "type": "string"
+                },
+                "linkedin": {
+                    "description": "Your linkedin profile",
+                    "type": "string"
+                }
+            }
+        },
+        "qualities": {
+            "description": "Your qualities",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "skills": {
+            "description": "Your skills",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "The name of the skill",
+                        "type": "string"
+                    },
+                    "level": {
+                        "description": "Your level of proficiency",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "workExperience": {
+            "description": "Your work experience",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "description": "Your job title",
+                        "type": "string"
+                    },
+                    "company": {
+                        "description": "The company you worked for",
+                        "type": "string"
+                    },
+                    "startDate": {
+                        "description": "The date you started working there",
+                        "type": "string"
+                    },
+                    "endDate": {
+                        "description": "The date you finished working there",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "A description of your role",
+                        "type": "string"
+                    }
+                }
+                }
+            },
+            "education": {
+                "description": "Your education",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "degree": {
+                            "description": "Your degree",
+                            "type": "string"
+                        },
+                        "school": {
+                            "description": "The school you attended",
+                            "type": "string"
+                        },
+                        "graduated": {
+                            "description": "If you have graduated",
+                            "type": "boolean"
+                        },
+                        "graduatingYear": {
+                            "description": "The year you graduated or are expected to graduate",
+                            "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

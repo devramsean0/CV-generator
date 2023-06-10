@@ -1,0 +1,6 @@
+dist/
+node_modules/
+CV.json
+output.md
+docs/
+scripts/
