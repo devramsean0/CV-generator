@@ -56,7 +56,7 @@ const outputMDRows = [];
         outputMDRows.push(`Phone: ${data.contact.phone}, `);
     }
     if (data.contact.website) {
-        outputMDRows.push(`Website: (${data.contact.website})[${data.contact.website}], `);
+        outputMDRows.push(`Website: [${data.contact.website}](${data.contact.website}), `);
     }
     console.log(green('Done Contact Info'))
     // Work Experience
